@@ -2,39 +2,46 @@ package project1;
 
 import java.io.IOException;
 
-//import Lab5.LandingException;
-
+import lab5.LandingException;
+/**  Farmers have a name and a type. Four types will be enough. The type deter-
+mines which bonuses the farmer will have during the game, such as crop growing
+speed, or animal happiness bonuses.  */
 public class Farmer {
 	private String name = "";
 	private int age = 18;
-
+	/** constructs a Farmer */
 	public Farmer(String farmerName) {
 		name = farmerName;
 	}
-
+	/** create a setName(String name) method and get the farmer's name */
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	/** create a setAge(int n) method and get the farmer's age */
 	public void setAge(int n) {
 		age = n;
 	}
-
-	public String getName() {
+	/** create a getName() method and return the farmer's name */
+	public String getName() {//return name
 		return name;
 	}
-
-	public int getAge() {
+	/** create a getAge() method and return the farmer's age */
+	public int getAge() {//return age
 		return age;
 	}
-
+	/** create a buySeed(String seedName, Farm myFarm) method 
+	 * try to do five cases 
+	 * each case create a new object
+	 * calls decreaseMoney(corn.getPurchasePrice()) from Farm
+	 * calls startObserving(myFarm) method from farm
+	 * add each crop to it's list*/
 	public void buySeed(String seedName, Farm myFarm) throws IOException{
-		try {
+		try {//the farmer can do the buySeed action
 		switch (seedName) {
-		case "Corn":
-			Corn corn = new Corn();			
-			myFarm.decreaseMoney(corn.getPurchasePrice());
-			corn.startObserving(myFarm);
+		case "Corn"://the corn case
+			Corn corn = new Corn();//create	 a new Cron object which extends the class of crop		
+			myFarm.decreaseMoney(corn.getPurchasePrice());//call the decreaseMoney from farm class
+			corn.startObserving(myFarm);//
 			myFarm.cornList.add(corn);
 			break;
 		case "Carrot":
@@ -68,7 +75,14 @@ public class Farmer {
 		}
 
 	}
-
+   /** create addConfigureSeed(String s, Farm myFarm) method 
+    * there are five cases to switch 
+    * each case calls setHeigth(Double.parseDouble(paraments[0])) method
+    * calls setHarvestTime(Double.parseDouble(paraments[1])) method
+    * calls setLeftTimeToHarvest(Double.parseDouble(paraments[2])) method
+    * calls setPurchasePrice(Double.parseDouble(paraments[3])) method  
+    * calls startObserving(myFarm) method
+    * add each crop to it's list*/
 	public void addConfigureSeed(String s, Farm myFarm)
 	{
 		//String t = "Carrot:" + h.getHeigth()+ ","+h.getHarvestTime()+","+h.getLeftTimeToHarvest()+","+h.getSellingPrice()+"\n";
@@ -79,7 +93,7 @@ public class Farmer {
 			Corn corn = new Corn();			
 			corn.setHeigth(Double.parseDouble(paraments[0]));
 			corn.setHarvestTime(Double.parseDouble(paraments[1]));
-			corn.setLeftTimeToHarvers(Double.parseDouble(paraments[2]));
+			corn.setLeftTimeToHarvest(Double.parseDouble(paraments[2]));
 			corn.setPurchasePrice(Double.parseDouble(paraments[3]));
 			corn.startObserving(myFarm);
 			myFarm.cornList.add(corn);
@@ -88,7 +102,7 @@ public class Farmer {
 			Carrot carrot = new Carrot();			
 			carrot.setHeigth(Double.parseDouble(paraments[0]));
 			carrot.setHarvestTime(Double.parseDouble(paraments[1]));
-			carrot.setLeftTimeToHarvers(Double.parseDouble(paraments[2]));
+			carrot.setLeftTimeToHarvest(Double.parseDouble(paraments[2]));
 			carrot.setPurchasePrice(Double.parseDouble(paraments[3]));
 			carrot.startObserving(myFarm);
 			myFarm.carrotList.add(carrot);
@@ -97,7 +111,7 @@ public class Farmer {
 			Eggplant eggplant = new Eggplant();
 			eggplant.setHeigth(Double.parseDouble(paraments[0]));
 			eggplant.setHarvestTime(Double.parseDouble(paraments[1]));
-			eggplant.setLeftTimeToHarvers(Double.parseDouble(paraments[2]));
+			eggplant.setLeftTimeToHarvest(Double.parseDouble(paraments[2]));
 			eggplant.setPurchasePrice(Double.parseDouble(paraments[3]));
 			eggplant.startObserving(myFarm);
 			myFarm.eggplantList.add(eggplant);
@@ -106,7 +120,7 @@ public class Farmer {
 			KiwiFruit kiwifruit = new KiwiFruit();			
 			kiwifruit.setHeigth(Double.parseDouble(paraments[0]));
 			kiwifruit.setHarvestTime(Double.parseDouble(paraments[1]));
-			kiwifruit.setLeftTimeToHarvers(Double.parseDouble(paraments[2]));
+			kiwifruit.setLeftTimeToHarvest(Double.parseDouble(paraments[2]));
 			kiwifruit.setPurchasePrice(Double.parseDouble(paraments[3]));
 			myFarm.kiwifruitList.add(kiwifruit);
 			kiwifruit.startObserving(myFarm);
@@ -115,14 +129,20 @@ public class Farmer {
 			Tomato tomato = new Tomato();			
 			tomato.setHeigth(Double.parseDouble(paraments[0]));
 			tomato.setHarvestTime(Double.parseDouble(paraments[1]));
-			tomato.setLeftTimeToHarvers(Double.parseDouble(paraments[2]));
+			tomato.setLeftTimeToHarvest(Double.parseDouble(paraments[2]));
 			tomato.setPurchasePrice(Double.parseDouble(paraments[3]));
 			myFarm.tomatoList.add(tomato);
 			tomato.startObserving(myFarm);
 			break;
 		}
 	}
-	
+	/** create a buyAnimal(String animalName, Farm myFarm) method 
+	 * try to do three cases 
+	 * each case create a new object
+	 * calls decreaseMoney(object.getPurchasePrice()) from Farm
+	 * add each animal to it's list
+	 * calls startObserving(myFarm) method from farm
+	 */
 	public void buyAnimal(String animalName, Farm myFarm) throws IOException {
 		try {
 			switch (animalName) {
@@ -149,7 +169,13 @@ public class Farmer {
 			throw new IOException(e.getMessage());
 		}
 	}
-
+	 /** create addConfigureAnimal(String s, Farm myFarm) method 
+	    * there are three cases to switch 
+	    * each case calls setHappiness(Double.parseDouble(paraments[0])) method
+	    * calls setHealth(Double.parseDouble(paraments[1])) method
+	    * add each animal to it's list 
+	    * calls startObserving(myFarm) method
+	    * */
 	public void addConfigureAnimal(String s, Farm myFarm) {
 		//String t = "Hen:" + h.getHappiness()+ ","+h.getHealth()+"\n";
 		String[] sTemp = s.split(":");
@@ -178,6 +204,13 @@ public class Farmer {
 			break;
 		}
 	}
+	
+	/** create a buyItems(String itemsName, Farm myFarm) method 
+	 * try to do three cases 
+	 * each case create a new object
+	 * calls decreaseMoney(object.getPurchasePrice()) from Farm
+	 * add each animal to it's list
+	 */
 	public void buyItems(String itemsName, Farm myFarm) throws IOException{
 		try {
 			switch (itemsName) {
@@ -201,7 +234,14 @@ public class Farmer {
 			throw new IOException(e.getMessage());
 		}
 	}
-
+	/** create addConfigureItems(String s, Farm myFarm) method
+	 *  if the second element of the string is 0 return noting 
+	 *  else set the string to count
+	    * there are three cases to switch 
+	    * each case traverses the count 
+	    * creates a new object 
+	    * add each item to it's list 
+	    * */
 	public void addConfigureItems(String s, Farm myFarm) {
 		String[] sTemp = s.split(":");
 		if(sTemp[1].equals(" 0"))
@@ -231,7 +271,9 @@ public class Farmer {
 			break;
 		}
 	}
-	
+	/** create a countCrops(String seedName, Farm myFarm)  
+	 * initialise count to 0
+	 * five cases to get each size*/
 	public int countCrops(String seedName, Farm myFarm) {
 		int count = 0;
 		switch (seedName) {
@@ -259,7 +301,10 @@ public class Farmer {
 		return count;
 
 	}
-
+    /** create countAnimal(String animalName, Farm myFarm) method
+     * initialise the count to 0
+     * three cases
+     * three cases get each size */
 	public int countAnimal(String animalName, Farm myFarm) {
 		int count = 0;
 		switch (animalName) {
@@ -279,7 +324,9 @@ public class Farmer {
 		return count;
 
 	}
-
+    /**  create countItems(String itemsName, Farm myFarm) method 
+     * initialise count to 0
+     * three cases get each size */
 	public int countItems(String itemsName, Farm myFarm) {
 		int count = 0;
 		switch (itemsName) {
@@ -316,7 +363,15 @@ public class Farmer {
 
 	
 	
-	
+	/** create feedAnimal(String animalName, Farm myfarm) method 
+	 * try to do 
+	 * if there is no animal throw an exception
+	 * switch three cases
+	 * traverses each size
+	 * get it's own index 
+	 * calls consumeFeedItems() method
+	 * calls feed() method
+	 * */
 	public void feedAnimal(String animalName, Farm myfarm) throws IOException {
 		try {
 			if(countAnimal(animalName, myfarm) == 0)
@@ -351,7 +406,15 @@ public class Farmer {
 	}
 
 	
-
+	/** create useHappyAgentItem(String animalName, Farm myfarm) method 
+	 * try to do 
+	 * if there is no animal throw an exception
+	 * switch three cases
+	 * traverses each size
+	 * get it's own index 
+	 * calls consumeHappyAgentItem() method
+	 * calls increaseHappiness() method
+	 * */
 	
 	public void useHappyAgentItem(String animalName, Farm myfarm) throws IOException {
 		try {
@@ -385,6 +448,15 @@ public class Farmer {
 		}
 	}
 
+	/** create  useTimeAgentItem(String seedName, Farm myfarm)  method 
+	 * try to do 
+	 * if there is no crops or not enough timeAgentitems  throw an exception
+	 * else switch five cases
+	 * traverses each size
+	 * get it's own index 
+	 * calls consumeTimeAgentItem() method
+	 * calls decreaseHarvestTime() method
+	 * */
 	public void useTimeAgentItem(String seedName, Farm myfarm) throws IOException {
 		try {
 			if(countCrops(seedName,myfarm)==0 || myfarm.timeAgentitemsList.size() == 0)
@@ -437,6 +509,15 @@ public class Farmer {
 			}
 	}
 	
+	
+	/** create  playWithAnimal(String animalName, Farm myfarm)  method 
+	 * try to do 
+	 * if there is no animal throw an exception
+	 * else switch three cases
+	 * traverses each size
+	 * get it's own index 
+	 * calls play() method
+	 * */
 	public void playWithAnimal(String animalName, Farm myfarm) throws IOException{
 
 			if (countAnimal(animalName, myfarm) ==0 )
@@ -467,14 +548,16 @@ public class Farmer {
 		
 	}
 	
-	
+	/** create getItemDetail(Farm myFarm) method  
+	 * return a string which list items' detail*/
 	public static String getItemDetail(Farm myFarm) {
 		String s = "Items-AnimalFeedItems: "+ myFarm.animalFeedItemsList.size()+ "\n";
 		s += "Items-HappyAgentItems: "+ myFarm.happyAgentItemsList.size()+ "\n";
 		s += "Items-TimeAgentItems: "+ myFarm.timeAgentitemsList.size()+ "\n";
 		return s;
 	}
-	
+	/** create getAniamlDetail(Farm myFarm) method  
+	 * return a string which list animals' detail*/
 	public static String getAniamlDetail(Farm myFarm) {
 		String s= "";
 		for(int i = 0 ; i<myFarm.henList.size(); i++)
@@ -498,7 +581,8 @@ public class Farmer {
 		}
 		return s;
 	}
-	
+	/** create getCropDetail(Farm myFarm) method  
+	 * return a string which list crops' detail*/
 	public static String getCropDetail(Farm myFarm) {
 		String s= "";
 		for(int i = 0 ; i<myFarm.carrotList.size(); i++)

@@ -5,108 +5,130 @@ import java.util.ArrayList;
 import lab7.Observable;
 
 
+/**A farm calss as a subject need extend observable
+ *the farm keeps track of the amount of the money,the 
+ *amount of the animals ,the amountmof crops and the 
+ *amount of  items.  It informs observers of changes 
+ *and contains a list of observers*/
 
-
-
-
-public class Farm extends Observable{//the farm calss as a subject need extend observable
-    // the farm keeps track of the amount of the money,the amount of the animals ,the amount
-	//of crops and the amount of  items.  it informs observers of changes.               
+public class Farm extends Observable{
+	/**initialise farm's name
+	 * initialise farm's type
+	 * initialise farm's money
+	 * initialise farm's isChangeDay to false  */
+	private String name ;
+	private int type ;
+	private double money;
+	static boolean isChangeDay = false; 
 	
-	private String name ;//give the farm a name
-	private int type ; //there are four types of farm
-	private double money;//initialise the money
-	static boolean isChangeDay = false; //set the ischangeday to false
-	
-	
-	static ArrayList <Pig> pigList = new ArrayList<Pig> ();//three different type of animals
-	static ArrayList <Hen> henList = new ArrayList<Hen> ();//each aniaml has a list 
+	/** animal observers,there are three lists of animal
+	 *  crop observers,there are five lists of crop
+	 *  item observers,there are three lists of item */
+	static ArrayList <Pig> pigList = new ArrayList<Pig> ();
+	static ArrayList <Hen> henList = new ArrayList<Hen> ();
 	static ArrayList <Cow> cowList = new ArrayList<Cow> ();
-	static ArrayList <Carrot> carrotList = new ArrayList<Carrot> ();//five different type of crops
-	static ArrayList <Corn> cornList = new ArrayList<Corn> ();//each crop has a list
+	static ArrayList <Carrot> carrotList = new ArrayList<Carrot> ();
+	static ArrayList <Corn> cornList = new ArrayList<Corn> ();
 	static ArrayList <Eggplant> eggplantList = new ArrayList<Eggplant> ();
 	static ArrayList <KiwiFruit> kiwifruitList = new ArrayList<KiwiFruit> ();
 	static ArrayList <Tomato> tomatoList = new ArrayList<Tomato> ();
-	//three type of items,each item has a list
 	static ArrayList <AnimalFeedItems> animalFeedItemsList = new ArrayList<AnimalFeedItems> ();
 	static ArrayList <HappyAgentItems> happyAgentItemsList = new ArrayList<HappyAgentItems> ();
 	static ArrayList <TimeAgentItems> timeAgentitemsList = new ArrayList<TimeAgentItems> ();
 	
 
-	/**
-	 * 
-	 */
+	/**construct the farm 
+	 * initilise the type,there are four types of farm
+	 * set the initial money to 2000
+	 * if the type is the fourth of farm
+	 set the initial money to 2400 */
 	public Farm( int typeId, String farmName) {
-	    // initialise the farm
-		type = typeId;    //initilise the type,there are four types of farm
-		name = farmName;  //initilise the farm name
-		 money = 2000;    //set the initial money to 2000
-		 if (type == 4)   //if the type is the fourth of farm
-			 money = 2400;//set the initial money to 2400
+	   
+		type = typeId;    
+		name = farmName; 
+		 money = 2000;   
+		 if (type == 4)   
+			 money = 2400;
 		 
 	}
-	
+	/** set n to the type of farm*/
 	public void setType(int n)
 	{
-		type = n;//set n to the type of farm
+		type = n;
 	}
+	/** set  the left money to money */
 	public void setMoney(double leftMoney)
 	{
-		money = leftMoney;//set  the left money 
+		money = leftMoney;
 	}
-	
+	/** set a name to farm */
 	public void setName(String name)
 	{
-		this.name = name;//set a name to farm
+		this.name = name;
 	}
+	/** get money from farm */
 	public double getMoney() {
-		return this.money;//get money from farm
+		return this.money;
 	}
-		
+	/** create a decreaseMoney(double m) method
+	 *  if money is lager than m(includes),set money
+	 *   equals  the money to minus 2 
+	 *  else shrow a exception */	
 	public void decreaseMoney(double m)
 	{
 		if(this.money >= m)
-			this.money -=m ;// decrease the money
+			this.money -=m ;
 		else
 			throw new IllegalArgumentException("oops, you do not have enough money to buy");//else throw an exception
 	}
-	
-	public void increaseMoney(double m)//increase the money
+	/**create a increaseMoney(double m) set money equals the money to add m */
+	public void increaseMoney(double m)
 	{
 		this.money += m;
 	}
-	
-	public void consumeFeedItems() {//consume the  feed item
-		if( animalFeedItemsList.size() >= 1) //once choose an animal option to consume
-			animalFeedItemsList.remove(0);   //need remove from this item of list
+	/**create a consumeFeedItems() method. if the size of animalFeedItemsList
+	 * is larger than one (includes),remove the first index of the 
+	 * animalFeedItemsList. else throw a excpetion*/
+	public void consumeFeedItems() {
+		if( animalFeedItemsList.size() >= 1) 
+			animalFeedItemsList.remove(0);   
 		else
 			throw new IllegalArgumentException("oops, you do not have enough food to feed animal");
 			
-	}//else throw an exception
-	
-	public void consumeHappyAgentItem() {//consume the happy agent item
-		if( happyAgentItemsList.size() >= 1)//once choose an an animal option to consume
-			happyAgentItemsList.remove(0);//need remove from this item of list
+	}
+	/**create a consumeHappyAgentItem() method. if the size of happyAgentItemsList
+	 * is larger than one (includes),remove the first index of the 
+	 * happyAgentItemsList. else throw a excpetion*/
+	public void consumeHappyAgentItem() {
+		if( happyAgentItemsList.size() >= 1)
+			happyAgentItemsList.remove(0);
 		else
 			throw new IllegalArgumentException("oops, you do not have happy agent to use");
-	}//else throw an exception
-	
-	public void consumeTimeAgentItem() {//consume the time agent item
-		if( timeAgentitemsList.size() >= 1)//once choose an crop option to consume
-			timeAgentitemsList.remove(0);//need remove from this item of list
+	}
+	/**create a consumeTimeAgentItem method. if the size of timeAgentitemsList
+	 * is larger than one (includes),remove the first index of the 
+	 * timeAgentitemsList. else throw a excpetion*/
+	public void consumeTimeAgentItem() {
+		if( timeAgentitemsList.size() >= 1)
+			timeAgentitemsList.remove(0);
 		else
 			throw new IllegalArgumentException("oops, you do not have time agent to use");
-	}//else throw an exception
-	
+	}
+	/** create a getName() method and  return name */
 	public String getName()
 	{
-		return name;//get the farm of farm
+		return name;
 	}
+	/** create a getType() method and  return type */
 	public int getType()
 	{
-		return type;//get the type of farm
+		return type;
 	}
-	public void lostCrop(String seedName) {//lost crops from the farm
+	/**create a lostCrop(String seedName) method 
+	 * there are five type of crops which has a certain length of list
+	 * when at each case,read the length of this crop and traverse the 
+	 * half length of the crop,remove the half length of the crop */
+	public void lostCrop(String seedName) {
 		switch(seedName) {
 		case "Corn":
 			int len = cornList.size();
@@ -136,22 +158,28 @@ public class Farm extends Observable{//the farm calss as a subject need extend o
 		}
 	}
 	
-	
+	/** create a setIsChangeDay(boolean isChangeDay) method 
+	 * @param isChangeDay   parse the boolean to check it is a change day or not
+	 * if it isChangeDay,call setChanged method from Observable class
+	 * call notifyObservers method from Observable
+	 * set money equals the money add moveToNextDayBouns()
+	 * else set isChangeDay */
 	public void setIsChangeDay(boolean isChangeDay)
 	{
 		if(isChangeDay)
 		{
-			this.isChangeDay = isChangeDay;//set is change day to this farm 
+			this.isChangeDay = isChangeDay;
 		
-			super.setChanged();//set change day
-			super.notifyObservers("move to next day");//if the day has changed,as indicated by the haschanged method
+			super.setChanged();
+			super.notifyObservers("move to next day");
 			
-			money += moveToNextDayBouns();//calculate the money  and move to the next day
+			money += moveToNextDayBouns();
 		}
 		else
-			this.isChangeDay = isChangeDay;//else return false
+			this.isChangeDay = isChangeDay;
 	}
-
+	/**create a moveToNextDayBouns() method 
+	 * set each size of animal and crop to increace its five times */
 	public double moveToNextDayBouns() {// in the next day,all animals and crops will increace to their own amount of five times 
 		double b = 0.0;
 		b += pigList.size()*5;
@@ -164,7 +192,9 @@ public class Farm extends Observable{//the farm calss as a subject need extend o
 		b += tomatoList.size()*5;
 		return b;
 	}
-	
+	/**create toString()method 
+	 * set the string to "Welcome to " + name +" Farm, "+" you have "+ money +" dollars \n";
+	 * return the string*/
 	public String toString()//print a welcome string
 	{
 		
